@@ -1,0 +1,6 @@
+*.out
+*.exe
+*.so
+venv/
+venv_win/
+

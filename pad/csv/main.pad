@@ -1,0 +1,14 @@
+{@
+    from "csv" import CSV
+
+    text = "123,223,323\nabc,def,ghi"
+
+    csv = CSV.new()
+    csv.parse(text)
+
+    puts(csv.rows[0])
+    puts(csv.rows[1])
+
+    s = csv.stringify()
+    puts(s)
+@}

@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>Popup</title>
+<script>
+class Popup {
+    constructor () {
+    }
+
+    init (x, y, message) {
+        this.x = x - ((14 * message.length) / 2)
+        this.y = y - 50
+        this.root = document.createElement('div')
+        this.root.textContent = message
+        this.root.className = 'popupBtn'
+        this.root.style.position = 'absolute'
+        this.root.style.left = this.x + 'px'
+        this.root.style.top = this.y + 'px'
+        this.root.style.opacity = 1
+        document.body.appendChild(this.root)
+    }
+
+    run () {
+        if (this.iid) {
+            clearInterval(this.iid)
+        }
+        this.iid = setInterval(this.update.bind(this), 33)
+
+        setTimeout(() => {
+            clearInterval(this.iid)
+            this.root.parentNode.removeChild(this.root)
+        }, 2000)
+    }
+
+    update () {
+        this.y--
+
+        this.root.style.top = this.y + 'px'
+        this.root.style.opacity -= 0.02
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.querySelector('#btn')
+    btn.addEventListener('click', ev => {
+        const popup = new Popup()
+        popup.init(
+            ev.clientX,
+            ev.clientY,
+            "Hello, World!",
+        )
+        popup.run()
+    })
+})
+</script>
+<style>
+body {
+    padding-top: 300px;
+    padding-left: 150px;
+}
+.popupBtn {
+    border: 1px solid #666;
+    border-radius: 8px;
+    background: white;
+    padding: 8px 16px;
+    font-size: 24px;
+}
+</style>
+</head>
+<body>
+    <button id="btn">クリックしてください</button>
+</body>
+</html>
